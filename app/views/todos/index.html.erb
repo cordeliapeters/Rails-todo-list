@@ -5,20 +5,21 @@
   <% @todos.each do |todo| %>
     <div class="item" id="<%=todo.id%>"><li><%= todo.title %></br>
       <%= todo.description%></br>
-      <%= link_to 'Delete', todo_path(todo), :method => :delete, data: {confirm: "Are you sure?"} %>
-      <%= link_to 'Edit', edit_todo_path(todo)%>
+      <div class="delete_button"> <%= link_to 'Delete', todo_path(todo), :method => :delete %> </div>
+      <div class="edit_button"><%= link_to 'Edit', edit_todo_path(todo)%></div>
     </li></div>
   <% end %>
 </ol>
 </div>
 
 <script id="new_todo" type="text/x-handlebars-template">
-  <div class="item">
+  <div class="item" id="{{data.id}}">
     <li>{{data.title}}</br>
     {{data.description}}</br>
-    <a href="/todos/{{data.id}}"> Delete </a>
-    <a href="/todos/{{data.id}}"> Edit </a>
-    </li></div>
+    <div class="delete_button"><a href="/todos/{{data.id}}"> Delete </a></div>
+    <div class="edit_button"><a href="/todos/{{data.id}}"> Edit </a></div>
+    </li>
+  </div>
 </script>
 
 <div id="new_todo_form" style="display:none">

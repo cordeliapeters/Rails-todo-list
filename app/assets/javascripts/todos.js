@@ -29,8 +29,22 @@ $(document).ready(function(){
       $(".new_todo_link").show();
       $("#new_todo_form").hide();
     });
-});
+  });
 
+  $("ol").delegate(".delete_button", "click", function(event){
+    event.preventDefault();
+    console.log("ajax is working");
+    console.log(this);
+    var url = $(this).find("a").attr("href");
+    console.log(url);
+    $.ajax({
+      url: url,
+      type: "delete",
+      dataType: "json"
+    }).done(function(response){
+      $(".list").find("#" + response.id).remove();
+    })
+  })
 
 });
 
