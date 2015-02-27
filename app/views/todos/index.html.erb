@@ -1,0 +1,13 @@
+<h1>Your Todos: </h1>
+<%= link_to 'Logout', logout_path, :method => :delete %>
+<ol>
+  <% @todos.each do |todo| %>
+    <li><%= todo.title %></br>
+      <%= todo.description%></br>
+      <%= link_to 'Delete', todo_path(todo), :method => :delete, data: {confirm: "Are you sure?"} %>
+      <%= link_to 'Edit', edit_todo_path(todo)%>
+    </li>
+  <% end %>
+</ol>
+
+<%= link_to 'New Todo', new_todo_path %>
