@@ -1,13 +1,29 @@
 <h1>Your Todos: </h1>
 <%= link_to 'Logout', logout_path, :method => :delete %>
+<div class="list">
 <ol>
   <% @todos.each do |todo| %>
-    <li><%= todo.title %></br>
+    <div class="item" id="<%=todo.id%>"><li><%= todo.title %></br>
       <%= todo.description%></br>
       <%= link_to 'Delete', todo_path(todo), :method => :delete, data: {confirm: "Are you sure?"} %>
       <%= link_to 'Edit', edit_todo_path(todo)%>
-    </li>
+    </li></div>
   <% end %>
 </ol>
+</div>
 
-<%= link_to 'New Todo', new_todo_path %>
+<script id="new_todo" type="text/x-handlebars-template">
+  <div class="item">
+    <li>{{data.title}}</br>
+    {{data.description}}</br>
+    <a href="/todos/{{data.id}}"> Delete </a>
+    <a href="/todos/{{data.id}}"> Edit </a>
+    </li></div>
+</script>
+
+<div id="new_todo_form" style="display:none">
+  <%= render :partial => "create" %>
+</div>
+
+<div class="new_todo_link"><%= link_to 'New Todo', new_todo_path %></div>
+

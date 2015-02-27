@@ -15,7 +15,9 @@ class TodosController < ApplicationController
   def create
     @new_todo = Todo.new(title: params[:todo][:title], description: params[:todo][:description], user_id: session[:user_id])
     if @new_todo.save
-      redirect_to todos_path
+      respond_to do |format|
+        format.json {render json: @new_todo}
+      end
     else
       @errors = "You need to complete all of the fields"
       render :new
